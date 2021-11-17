@@ -40,6 +40,7 @@ def login_session():
 def logout_session():
     """Logout session"""
     session_id = request.cookies.get('session_id')
+    print(request.cookies)
     user = AUTH.get_user_from_session_id(session_id)
     if user:
         AUTH.destroy_session(user.id)
@@ -52,7 +53,7 @@ def profile_session():
     """Profile session"""
     session_id = request.cookies.get('session_id')
     user = AUTH.get_user_from_session_id(session_id)
-    if user:
+    if user != None:
         return jsonify({"email": user.email}), 200
     abort(403)
 
